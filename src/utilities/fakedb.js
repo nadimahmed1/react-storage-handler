@@ -25,17 +25,23 @@ const addToDb = id => {
 }
 
 const removeFromDb = id => {
-    const storedCart = localStorage.getItem('shopping-cart');
-
-    if (storedCart) {
-        const shoppingCart = JSON.parse(storedCart);
-        if (id in shoppingCart) {
-            delete shoppingCart[id];
-            localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart))
+    const getCart = localStorage.getItem('shopping-cart');
+    if (getCart) {
+        const setCart = JSON.parse(getCart);
+        if (id in setCart) {
+            delete setCart[id];
+            localStorage.setItem('shopping-cart', JSON.stringify(setCart))
         }
     }
 
 
 }
 
-export { addToDb, removeFromDb };
+// Reduce
+const getTotalPrice = products => {
+    const reducer = (previous, current) => previous + current.price;
+    const total = products.reduce(reducer, 0);
+    return total
+}
+
+export { addToDb, removeFromDb, getTotalPrice };

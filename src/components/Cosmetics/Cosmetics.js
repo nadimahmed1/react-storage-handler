@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { getTotalPrice } from '../../utilities/fakedb';
 import Cosmetic from '../Cosmetic/Cosmetic';
 
 
@@ -13,9 +14,12 @@ const Cosmetics = () => {
             .then(data => setCosmetics(data))
     }, [])
 
+    const total = getTotalPrice(cosmetics)
+
     return (
         <div>
             <h1>Welcome to my Cosmetics Store</h1>
+            <p>TotalAmount: {total}</p>
 
             {
                 cosmetics.map(cosmetic => <Cosmetic
